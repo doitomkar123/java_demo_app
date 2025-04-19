@@ -51,7 +51,10 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+                            <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+                            <formats>
+                                <format>HTML</format>
+                            </formats>
                         </configuration>
                     </execution>
                 </executions>
@@ -70,11 +73,21 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>3.0.0</version>
-                <configuration>
-                    <outputDirectory>${project.build.directory}/site/surefire-report</outputDirectory>
-                    <showSuccess>true</showSuccess>
-                    <linkXRef>false</linkXRef>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>test-reports</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/surefire-report</outputDirectory>
+                            <showSuccess>true</showSuccess>
+                            <linkXRef>false</linkXRef>
+                            <outputName>index.html</outputName>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
